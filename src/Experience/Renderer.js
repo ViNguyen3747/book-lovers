@@ -20,14 +20,14 @@ export default class Renderer {
   }
 
   setInstance() {
-    this.debugObject = { background: "#403a2e" };
+    this.debugObject = { background: "#898376" };
     this.instance = new THREE.WebGLRenderer({
       canvas: this.canvas,
       antialias: true,
     });
     this.instance.outputEncoding = THREE.sRGBEncoding;
     this.instance.setSize(this.sizes.width, this.sizes.height);
-    this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
+    this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio * 1.5, 2));
     if (this.debug.active) {
       this.debugFolder.addColor(this.debugObject, "background").onChange(() => {
         this.instance.setClearColor(this.debugFolder.background);

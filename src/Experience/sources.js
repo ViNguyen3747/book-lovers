@@ -2,7 +2,7 @@ export default [
   {
     name: "firstModel",
     type: "gltfModel",
-    path: "/firstModel.glb",
+    path: "/firstModel.gltf",
   },
   {
     name: "secondModel",

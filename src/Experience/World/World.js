@@ -13,7 +13,6 @@ export default class World {
     this.resources.on("ready", () => {
       //setup
       this.room = new Room();
-      // this.environment = new Environment();
     });
   }
 

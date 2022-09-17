@@ -16,17 +16,21 @@ export default class Room {
     //setup
     this.firstResource = this.resources.items.firstModel;
     this.firstBakedTexture = this.resources.items.firstTexture;
-    this.firstBakedTexture.encoding = THREE.sRGBEncoding;
+    this.firstBakedTexture.encoding = THREE.LinearEncoding;
+    this.firstBakedTexture.magFilter = THREE.LinearFilter;
+    this.firstBakedTexture.minFilter = THREE.LinearFilter;
     this.firstBakedTexture.flipY = false;
 
     this.secondResource = this.resources.items.secondModel;
     this.secondBakedTexture = this.resources.items.secondTexture;
-    this.secondBakedTexture.encoding = THREE.sRGBEncoding;
+    this.secondBakedTexture.encoding = THREE.LinearEncoding;
+    this.secondBakedTexture.magFilter = THREE.LinearFilter;
+    this.secondBakedTexture.minFilter = THREE.LinearFilter;
     this.secondBakedTexture.flipY = false;
 
     this.groundResource = this.resources.items.groundModel;
     this.groundTexture = this.resources.items.groundTexture;
-    this.groundTexture.encoding = THREE.sRGBEncoding;
+    this.groundTexture.encoding = THREE.LinearEncoding;
     this.groundTexture.flipY = false;
 
     this.setMaterial();
@@ -34,20 +38,25 @@ export default class Room {
   }
   setMaterial() {
     this.debugObject = { coffee: "#090501" };
+
     this.firstBakedMaterial = new THREE.MeshBasicMaterial({
       map: this.firstBakedTexture,
     });
+
     this.secondBakedMaterial = new THREE.MeshBasicMaterial({
       map: this.secondBakedTexture,
     });
+
     this.groundMaterial = new THREE.MeshBasicMaterial({
       map: this.groundTexture,
     });
+
     this.lightMaterial = new THREE.MeshBasicMaterial({ color: 0xffffdb });
+
     this.coffeeMaterial = new THREE.MeshBasicMaterial({
       color: this.debugObject.coffee,
     });
-    console.log(this.coffeeMaterial);
+
     this.panelMaterial = new THREE.MeshBasicMaterial({ color: 0xffc28f });
   }
   setModel() {
@@ -56,6 +65,7 @@ export default class Room {
     this.firstModel.traverse((child) => {
       child.material = this.firstBakedMaterial;
     });
+
     this.firstModel.position.x = 1;
     this.firstModel.position.y = -2;
 
