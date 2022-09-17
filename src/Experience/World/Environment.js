@@ -15,8 +15,12 @@ export default class Environment {
 
     // this.setSunLight();
     // this.setEnvironmentMap();
+    this.setFog();
   }
-
+  setFog() {
+    const fog = new THREE.Fog("#403a2e", 1, 2);
+    this.scene.fog = fog;
+  }
   setSunLight() {
     this.sunLight = new THREE.DirectionalLight("#ffffff", 10);
     this.sunLight.castShadow = true;

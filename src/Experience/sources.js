@@ -10,6 +10,11 @@ export default [
     path: "/secondModel.glb",
   },
   {
+    name: "groundModel",
+    type: "gltfModel",
+    path: "/ground.glb",
+  },
+  {
     name: "firstTexture",
     type: "texture",
     path: "/bake1.jpg",
@@ -18,5 +23,10 @@ export default [
     name: "secondTexture",
     type: "texture",
     path: "/bake2.jpg",
+  },
+  {
+    name: "groundTexture",
+    type: "texture",
+    path: "/ground.jpg",
   },
 ];

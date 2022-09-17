@@ -24,6 +24,7 @@ export default class Camera {
       0.1,
       100
     );
+
     this.instance.position.set(-2.5, 5, 10);
     this.scene.add(this.instance);
     if (this.debug.active) {
@@ -53,6 +54,15 @@ export default class Camera {
     this.controls.minDistance = 7;
     this.controls.maxDistance = 15;
     this.controls.enableDamping = true;
+    this.controls.maxPolarAngle = 1.55;
+    if (this.debug.active) {
+      this.debugFolder
+        .add(this.controls, "maxPolarAngle")
+        .name("cameraAngle")
+        .min(-10)
+        .max(10)
+        .step(0.001);
+    }
   }
 
   resize() {
@@ -61,7 +71,6 @@ export default class Camera {
   }
 
   update() {
-    // // console.log(this.instance.position);
     this.controls.update();
   }
 }

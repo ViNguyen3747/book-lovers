@@ -20,11 +20,12 @@ export default class Renderer {
   }
 
   setInstance() {
-    this.debugObject = { background: "#36241c" };
+    this.debugObject = { background: "#403a2e" };
     this.instance = new THREE.WebGLRenderer({
       canvas: this.canvas,
       antialias: true,
     });
+    this.instance.outputEncoding = THREE.sRGBEncoding;
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
     if (this.debug.active) {
