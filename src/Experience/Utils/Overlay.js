@@ -21,7 +21,7 @@ export default class Overlay {
             value: 0,
             delay: 1,
           });
-          this.loadingContainer.style.opacity = 0;
+          // this.loadingContainer.style.opacity = 0;
         });
       },
 

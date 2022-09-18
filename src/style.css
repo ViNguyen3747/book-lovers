@@ -51,9 +51,10 @@ body {
   color: #898376;
 }
 .message {
-  width: 60%;
-  margin: 5px auto;
+  margin: 10px auto;
   color: #e2e2e2;
-  font-size: larger;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-align: center;
   font-family: "Work Sans", sans-serif;
 }
