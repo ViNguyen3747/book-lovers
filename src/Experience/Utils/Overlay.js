@@ -8,8 +8,8 @@ export default class Overlay {
   constructor() {
     this.experience = new Experience();
     this.scene = this.experience.scene;
-    this.loadingBarElement = document.querySelector(".loading-bar");
-
+    this.loadingBarElement = document.querySelector(".progressing");
+    this.loadingContainer = document.querySelector(".container");
     this.setOverlay();
 
     this.loadingManager = new THREE.LoadingManager(
@@ -21,16 +21,14 @@ export default class Overlay {
             value: 0,
             delay: 1,
           });
-
-          this.loadingBarElement.classList.add("ended");
-          this.loadingBarElement.style.transform = "";
+          this.loadingContainer.style.opacity = 0;
         });
       },
 
       // Progress
       (itemUrl, itemsLoaded, itemsTotal) => {
-        const progressRatio = itemsLoaded / itemsTotal;
-        this.loadingBarElement.style.transform = `scaleX(${progressRatio})`;
+        const progressRatio = (itemsLoaded / itemsTotal) * 100;
+        this.loadingBarElement.style.width = `${progressRatio}%`;
       }
     );
   }
