@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import EventEmitter from "./EventEmitter";
+import Overlay from "./Overlay";
 
 export default class Resources extends EventEmitter {
   constructor(sources) {
@@ -13,6 +14,7 @@ export default class Resources extends EventEmitter {
     this.items = {};
     this.toLoad = this.sources.length;
     this.loaded = 0;
+    this.overlay = new Overlay();
 
     this.setLoaders();
     this.startLoading();
@@ -24,10 +26,11 @@ export default class Resources extends EventEmitter {
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("draco/");
 
-    this.loaders.gltfLoader = new GLTFLoader();
+    this.loaders.gltfLoader = new GLTFLoader(this.overlay.loadingManager);
     this.loaders.gltfLoader.setDRACOLoader(dracoLoader);
-    this.loaders.textureLoader = new THREE.TextureLoader();
-    this.loaders.cubeTextureLoader = new THREE.CubeTextureLoader();
+    this.loaders.textureLoader = new THREE.TextureLoader(
+      this.overlay.loadingManager
+    );
   }
 
   startLoading() {
@@ -41,11 +44,6 @@ export default class Resources extends EventEmitter {
           break;
         case "texture":
           this.loaders.textureLoader.load(source.path, (file) => {
-            this.sourceLoaded(source, file);
-          });
-          break;
-        case "cubeTexture":
-          this.loaders.cubeTextureLoader.load(source.path, (file) => {
             this.sourceLoaded(source, file);
           });
           break;

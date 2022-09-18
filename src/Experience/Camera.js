@@ -25,7 +25,7 @@ export default class Camera {
       100
     );
 
-    this.instance.position.set(-2.5, 5, 10);
+    this.instance.position.set(2, 3, 15);
     this.scene.add(this.instance);
     if (this.debug.active) {
       this.debugFolder
