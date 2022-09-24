@@ -1,13 +1,13 @@
 export default [
   {
-    name: "firstModel",
+    name: "roomModel",
     type: "gltfModel",
-    path: "/firstModel.gltf",
+    path: "/gameRoom.glb",
   },
   {
-    name: "secondModel",
+    name: "lightModel",
     type: "gltfModel",
-    path: "/secondModel.glb",
+    path: "/light.glb",
   },
   {
     name: "groundModel",
@@ -15,14 +15,9 @@ export default [
     path: "/ground.glb",
   },
   {
-    name: "firstTexture",
+    name: "roomTexture",
     type: "texture",
-    path: "/bake1.jpg",
-  },
-  {
-    name: "secondTexture",
-    type: "texture",
-    path: "/bake2.jpg",
+    path: "/gameRoomBaked.jpg",
   },
   {
     name: "groundTexture",

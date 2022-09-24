@@ -6,133 +6,56 @@ export default class Room {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
-    this.debug = this.experience.debug;
-
-    if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("modelPosition");
-      this.coffeeDebug = this.debug.ui.addFolder("coffee");
-    }
 
     //setup
-    this.firstResource = this.resources.items.firstModel;
-    this.firstBakedTexture = this.resources.items.firstTexture;
+    this.firstResource = this.resources.items.roomModel;
+    this.firstBakedTexture = this.resources.items.roomTexture;
     this.firstBakedTexture.encoding = THREE.LinearEncoding;
     this.firstBakedTexture.magFilter = THREE.LinearFilter;
     this.firstBakedTexture.minFilter = THREE.LinearFilter;
     this.firstBakedTexture.flipY = false;
 
-    this.secondResource = this.resources.items.secondModel;
-    this.secondBakedTexture = this.resources.items.secondTexture;
-    this.secondBakedTexture.encoding = THREE.LinearEncoding;
-    this.secondBakedTexture.magFilter = THREE.LinearFilter;
-    this.secondBakedTexture.minFilter = THREE.LinearFilter;
-    this.secondBakedTexture.flipY = false;
+    this.lightResource = this.resources.items.lightModel;
 
     this.groundResource = this.resources.items.groundModel;
     this.groundTexture = this.resources.items.groundTexture;
     this.groundTexture.encoding = THREE.LinearEncoding;
+    this.groundTexture.magFilter = THREE.LinearFilter;
+    this.groundTexture.minFilter = THREE.LinearFilter;
     this.groundTexture.flipY = false;
 
     this.setMaterial();
     this.setModel();
   }
   setMaterial() {
-    this.debugObject = { coffee: "#090501" };
-
     this.firstBakedMaterial = new THREE.MeshBasicMaterial({
       map: this.firstBakedTexture,
     });
-
-    this.secondBakedMaterial = new THREE.MeshBasicMaterial({
-      map: this.secondBakedTexture,
-    });
-
     this.groundMaterial = new THREE.MeshBasicMaterial({
       map: this.groundTexture,
     });
 
-    this.lightMaterial = new THREE.MeshBasicMaterial({ color: 0xffffdb });
-
-    this.coffeeMaterial = new THREE.MeshBasicMaterial({
-      color: this.debugObject.coffee,
-    });
-
-    this.panelMaterial = new THREE.MeshBasicMaterial({ color: 0xffc28f });
+    this.lightMaterial = new THREE.MeshBasicMaterial({ color: 0x0ca6ff });
+    this.darkerLightMaterial = new THREE.MeshBasicMaterial({ color: 0x0ca6ff });
   }
   setModel() {
     //First Group
     this.firstModel = this.firstResource.scene;
     this.firstModel.traverse((child) => {
-      child.material = this.firstBakedMaterial;
+      if (child.name === "darkerLight")
+        child.material = this.darkerLightMaterial;
+      else child.material = this.firstBakedMaterial;
     });
-
-    this.firstModel.position.x = 1;
     this.firstModel.position.y = -2;
-
-    //Second Group
-    this.secondModel = this.secondResource.scene;
-    this.secondModel.traverse((child) => {
-      child.material = this.secondBakedMaterial;
-    });
-    this.secondModel.position.x = 1;
-    this.secondModel.position.y = -2;
-
+    this.lightModel = this.lightResource.scene;
     //Ground
     this.groundModel = this.groundResource.scene;
     this.groundModel.traverse((child) => {
       child.material = this.groundMaterial;
     });
-    this.groundModel.position.x = 1;
+    this.lightModel.position.y = -2;
     this.groundModel.position.y = -2;
 
-    const coffee = this.secondModel.children.find(
-      (child) => child.name === "coffee"
-    );
-    coffee.material = this.coffeeMaterial;
-
-    const windowGlass = this.secondModel.children.find(
-      (child) => child.name === "windowglass"
-    );
-    windowGlass.material = this.lightMaterial;
-
-    const lightBulbs = this.secondModel.children.find(
-      (child) => child.name === "Light"
-    );
-    lightBulbs.material = this.lightMaterial;
-
-    const panel = this.secondModel.children.find(
-      (child) => child.name === "Panel"
-    );
-    panel.material = this.lightMaterial;
-
-    this.setDebug();
-
-    this.scene.add(this.firstModel, this.secondModel, this.groundModel);
-  }
-
-  setDebug() {
-    if (this.debug.active) {
-      this.debugFolder
-        .add(this.secondModel.position, "x")
-        .name("modelX")
-        .min(-10)
-        .max(10)
-        .step(0.001);
-      this.debugFolder
-        .add(this.secondModel.position, "y")
-        .name("modelY")
-        .min(-10)
-        .max(10)
-        .step(0.001);
-      this.debugFolder
-        .add(this.secondModel.position, "z")
-        .name("modelZ")
-        .min(-10)
-        .max(10)
-        .step(0.001);
-      this.coffeeDebug.addColor(this.debugObject, "coffee").onChange(() => {
-        this.coffeeMaterial.color.set(this.debugObject.coffee);
-      });
-    }
+    this.scene.add(this.firstModel, this.lightModel, this.groundModel);
   }
 }

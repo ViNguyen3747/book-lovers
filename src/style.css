@@ -35,26 +35,20 @@ body {
   margin: 0 auto;
   display: flex;
   padding: 5px;
-  border-radius: 30px;
   background: #e2e2e2;
 }
 
 .progressing {
   width: 0%;
-  background: #898376;
-  border-radius: 30px;
+  background: #16191e;
   transition: width 2s ease-out;
-}
-
-.loading-bar i {
-  font-size: 15px;
-  color: #898376;
 }
 .message {
   margin: 10px auto;
   color: #e2e2e2;
-  font-size: 20px;
+  font-size: 12px;
+  line-height: 20px;
   letter-spacing: 1px;
   text-align: center;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Press Start 2P", cursive;
 }

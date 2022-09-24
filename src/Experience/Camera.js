@@ -25,20 +25,20 @@ export default class Camera {
       100
     );
 
-    this.instance.position.set(2, 3, 15);
+    this.instance.position.set(7, 5, 10);
     this.scene.add(this.instance);
     if (this.debug.active) {
       this.debugFolder
         .add(this.instance.position, "x")
         .name("cameraX")
         .min(-10)
-        .max(10)
+        .max(20)
         .step(0.001);
       this.debugFolder
         .add(this.instance.position, "y")
         .name("cameraY")
         .min(-10)
-        .max(10)
+        .max(20)
         .step(0.001);
       this.debugFolder
         .add(this.instance.position, "z")
@@ -52,9 +52,9 @@ export default class Camera {
   setControls() {
     this.controls = new OrbitControls(this.instance, this.canvas);
     this.controls.minDistance = 7;
-    this.controls.maxDistance = 25;
+    this.controls.maxDistance = 10;
     this.controls.enableDamping = true;
-    this.controls.maxPolarAngle = 1.55;
+    this.controls.maxPolarAngle = 1.5;
     if (this.debug.active) {
       this.debugFolder
         .add(this.controls, "maxPolarAngle")
