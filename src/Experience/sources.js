@@ -2,12 +2,7 @@ export default [
   {
     name: "roomModel",
     type: "gltfModel",
-    path: "/gameRoom.glb",
-  },
-  {
-    name: "lightModel",
-    type: "gltfModel",
-    path: "/light.glb",
+    path: "/base.glb",
   },
   {
     name: "groundModel",
@@ -17,7 +12,7 @@ export default [
   {
     name: "roomTexture",
     type: "texture",
-    path: "/gameRoomBaked.jpg",
+    path: "/baked.jpg",
   },
   {
     name: "groundTexture",

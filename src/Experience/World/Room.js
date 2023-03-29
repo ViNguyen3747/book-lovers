@@ -15,8 +15,6 @@ export default class Room {
     this.firstBakedTexture.minFilter = THREE.LinearFilter;
     this.firstBakedTexture.flipY = false;
 
-    this.lightResource = this.resources.items.lightModel;
-
     this.groundResource = this.resources.items.groundModel;
     this.groundTexture = this.resources.items.groundTexture;
     this.groundTexture.encoding = THREE.LinearEncoding;
@@ -35,27 +33,23 @@ export default class Room {
       map: this.groundTexture,
     });
 
-    this.lightMaterial = new THREE.MeshBasicMaterial({ color: 0x0ca6ff });
-    this.darkerLightMaterial = new THREE.MeshBasicMaterial({ color: 0x0ca6ff });
+    this.textMaterial = new THREE.MeshBasicMaterial({ color: 0xaf7450 });
   }
   setModel() {
     //First Group
     this.firstModel = this.firstResource.scene;
     this.firstModel.traverse((child) => {
-      if (child.name === "darkerLight")
-        child.material = this.darkerLightMaterial;
+      if (child.name === "Text") child.material = this.textMaterial;
       else child.material = this.firstBakedMaterial;
     });
     this.firstModel.position.y = -2;
-    this.lightModel = this.lightResource.scene;
     //Ground
     this.groundModel = this.groundResource.scene;
     this.groundModel.traverse((child) => {
       child.material = this.groundMaterial;
     });
-    this.lightModel.position.y = -2;
     this.groundModel.position.y = -2;
 
-    this.scene.add(this.firstModel, this.lightModel, this.groundModel);
+    this.scene.add(this.firstModel, this.groundModel);
   }
 }
