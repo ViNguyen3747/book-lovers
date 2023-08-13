@@ -40,7 +40,7 @@ body {
 
 .progressing {
   width: 0%;
-  background: #16191e;
+  background: #dfa961;
   transition: width 2s ease-out;
 }
 .message {
